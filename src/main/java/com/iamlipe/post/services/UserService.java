@@ -25,8 +25,13 @@ public class UserService {
         return obj.orElseThrow(() -> new ObjectNotFoundException("User not found"));
     }
 
-    public User insert(User user) {
-        return repository.insert(user);
+    public void insert(User user) {
+        repository.insert(user);
+    }
+
+    public void delete(String id) {
+        findById(id);
+        repository.deleteById(id);
     }
 
     public User fromDTO(UserDTO userDTO) {
