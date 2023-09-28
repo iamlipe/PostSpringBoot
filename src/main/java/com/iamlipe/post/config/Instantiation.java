@@ -2,6 +2,7 @@ package com.iamlipe.post.config;
 
 import com.iamlipe.post.domain.Post;
 import com.iamlipe.post.domain.User;
+import com.iamlipe.post.dto.AuthorDTO;
 import com.iamlipe.post.repositories.PostRepository;
 import com.iamlipe.post.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,10 +31,11 @@ public class Instantiation implements CommandLineRunner {
         User alex = new User(null, "Alex Green", "alex@gmail.com");
         User bob = new User(null, "Bob Grey", "bob@gmail.com");
 
-        Post post1 = new Post(null, Instant.parse("2019-07-22T15:21:22Z"), "Departed trip", "I'm going to São Paulo. Hugs", maria);
-        Post post2 = new Post(null, Instant.parse("2019-07-21T03:42:10Z"), "Good Morning", "I woke up happy today", maria);
-
         userRepository.saveAll(Arrays.asList(maria, alex, bob));
+
+        Post post1 = new Post(null, Instant.parse("2019-07-22T15:21:22Z"), "Departed trip", "I'm going to São Paulo. Hugs", new AuthorDTO(maria));
+        Post post2 = new Post(null, Instant.parse("2019-07-21T03:42:10Z"), "Good Morning", "I woke up happy today", new AuthorDTO(maria));
+
         postRepository.saveAll(Arrays.asList(post1, post2));
     }
 }
