@@ -1,5 +1,6 @@
 package com.iamlipe.post.resources;
 
+import com.iamlipe.post.domain.Post;
 import com.iamlipe.post.domain.User;
 import com.iamlipe.post.dto.UserDTO;
 import com.iamlipe.post.services.UserService;
@@ -53,5 +54,11 @@ public class UserResource {
         user.setId(id);
         service.update(user);
         return ResponseEntity.noContent().build();
+    }
+
+    @RequestMapping(value = "/{id}/posts", method = RequestMethod.GET)
+    public ResponseEntity<List<Post>> findPosts(@PathVariable String id) {
+        User user = service.findById(id);
+        return ResponseEntity.ok().body(user.getPosts());
     }
 }
